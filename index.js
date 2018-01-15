@@ -1,8 +1,7 @@
 'use strict'
 
 const _ = require('lodash'),
-  metadataMappings = require('co-config/metadata-mappings.json'),
-  Redis = require('ioredis');
+  metadataMappings = require('co-config/metadata-mappings.json');
 
 
 class CoUnique{
