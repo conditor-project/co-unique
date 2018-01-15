@@ -1,0 +1,25 @@
+{
+  "name": "co-unique",
+  "version": "1.0.0",
+  "description": "Module ayant pour objet de valider l'unicité intra-base",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/conditor-project/co-unique.git"
+  },
+  "keywords": [
+    "conditor"
+  ],
+  "author": "conditor",
+  "license": "GNU",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "co-config": "git+https://github.com/conditor-project/co-config.git",
+    "lodash": "^4.17.4",
+    "mocha": "^4.1.0",
+    "rewire": "^3.0.2"
+  }
+}
