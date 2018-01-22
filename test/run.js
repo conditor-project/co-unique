@@ -21,65 +21,22 @@ const
       });
     });
 
-    it('La notice 2 matche bien', function (done) {
+    it('L id est rejeté', function (done) {
       docObject = testData[1];
       business.doTheJob(docObject, function (err) {
-        expect(err).to.be.undefined;
+        expect(err).to.be.not.undefined;
         done();
       });
     });
 
-    it('La notice 3 matche bien', function (done) {
-      docObject = testData[2];
+    it('La source n est pas trouvée', function (done) {
+      docObject = testData[1];
       business.doTheJob(docObject, function (err) {
-        expect(err).to.be.undefined;
+        expect(err).to.be.not.undefined;
         done();
       });
     });
 
-    it('La notice 4 matche bien', function (done) {
-      docObject = testData[3];
-      business.doTheJob(docObject, function (err) {
-        expect(err).to.be.undefined;
-        done();
-         
-      });
-    });
-
-    it('La notice 5 matche bien', function (done) {
-      docObject = testData[4];
-      business.doTheJob(docObject, function (err) {
-        expect(err).to.be.undefined;
-        done();
-        
-      });
-    });
-
-    it('La notice 6 matche bien', function (done) {
-      docObject = testData[5];
-      business.doTheJob(docObject, function (err) {
-        expect(err).to.be.undefined;
-        //expect(docObject.conditor_ident).to.be.equal(5);
-        done();
-      });
-    });
-
-    it('La notice 7 matche bien', function (done) {
-      docObject = testData[5];
-      business.doTheJob(docObject, function (err) {
-        expect(err).to.be.undefined;
-        //expect(docObject.conditor_ident).to.be.equal(5);
-        done();
-      });
-    });
-
-    it('La notice 8 matche bien', function (done) {
-      docObject = testData[5];
-      business.doTheJob(docObject, function (err) {
-        expect(err).to.be.undefined;
-        //expect(docObject.conditor_ident).to.be.equal(5);
-        done();
-      });
-    });
+    
 
   });

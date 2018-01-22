@@ -39,7 +39,7 @@ constructor() {
     }
     else {
       idSource = jsonLine[nameId];
-      if (_.indexOf(this.listId,idSource) !== -1){
+      if (_.indexOf(this.listId,idSource.value) !== -1){
 
         let error = {
           errCode: 2,
@@ -50,7 +50,7 @@ constructor() {
 
       }
       else {
-        this.listId.push(idSource);
+        this.listId.push(idSource.value);
         cb();
       }
     }
