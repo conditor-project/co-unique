@@ -19,7 +19,6 @@
     "chai": "^4.1.2",
     "co-config": "git+https://github.com/conditor-project/co-config.git",
     "lodash": "^4.17.4",
-    "mocha": "^4.1.0",
-    "rewire": "^3.0.2"
+    "mocha": "^4.1.0"
   }
 }

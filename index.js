@@ -51,6 +51,7 @@ constructor() {
       }
       else {
         this.listId.push(idSource);
+        cb();
       }
     }
   }
