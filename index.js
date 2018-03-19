@@ -27,7 +27,7 @@ constructor() {
       if (mappingSource.source === source) { nameId = mappingSource.nameID; }
     });
 
-    if ( nameId === undefined || nameId.trim ==="") {
+    if ( nameId === undefined || nameId.trim() ==="") {
 
       let error = {
         errCode: 1,
