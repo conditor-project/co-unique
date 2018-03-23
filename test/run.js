@@ -32,7 +32,6 @@ const
       docObject = testData[0];
       business.doTheJob(docObject = testData[0], function (err) {
         expect(err).to.be.undefined;
-        console.log(err);
         done();
       });
     });
@@ -41,7 +40,6 @@ const
       docObject = testData[1];
       business.doTheJob(docObject, function (err) {
         expect(err).to.be.not.undefined;
-        console.log(err);
         done();
       });
     });
@@ -50,7 +48,6 @@ const
       docObject = testData[2];
       business.doTheJob(docObject, function (err) {
         expect(err).to.be.not.undefined;
-        console.log(err);
         done();
       });
     });

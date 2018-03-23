@@ -74,7 +74,7 @@ class CoUnique{
         }
       })
       .then(res=>{
-        console.log('res : '+res);
+        //console.log('res : '+res);
         if (res === 0){
           let error = {
             errCode: 1,
