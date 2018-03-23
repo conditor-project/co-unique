@@ -22,7 +22,25 @@ class CoUnique{
     
   }
 
-  doTheJob(jsonLine, cb) {
+  beforeAnyJob(cbBefore){
+    this.redisClient.del("Module:"+this.redisKey+":_listId")
+    .catch((err)=>{
+      if (err){
+        let error = {
+          errCode: 1,
+          errMessage: "Erreur de delete de la liste d'id : "+err
+        };
+        cbBefore(error);
+      }}).then(()=>{
+
+        cbBefore();
+
+      });
+    
+  }
+
+
+  doTheJob(jsonLine, next) {
 
     let source = jsonLine.source;
     let idSource;
@@ -39,26 +57,36 @@ class CoUnique{
         errMessage: "Aucun mapping valide trouvé pour cette source."
       };
       jsonLine.error = error;
-      cb(error);
+      next(error);
 
     }
     else {
       idSource = jsonLine[nameId].value;
       this.redisClient.sadd(["Module:"+this.redisKey+":_listId",idSource])
-        .then(res=>{
-          if (res === 0){
-            let error = {
-              errCode: 1,
-              errMessage: "Id source en doublon dans le corpus"
-            };
-            jsonLine.error = error;
-            cb(error);
-          }
-          else if (res ===1){
-            cb();
-          }
-        });
-       
+      .catch(err=>{
+        if (err){
+          let error = {
+            errCode: 1,
+            errMessage: "Erreur d'ajout d'id à la liste"
+          };
+          jsonLine.error = error;
+          next(error);
+        }
+      })
+      .then(res=>{
+        console.log('res : '+res);
+        if (res === 0){
+          let error = {
+            errCode: 1,
+            errMessage: "Id source en doublon dans le corpus"
+          };
+          jsonLine.error = error;
+          next(error);
+        }
+        else {
+          next();
+        }
+      });
     }
   }
 }
