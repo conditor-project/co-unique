@@ -59,8 +59,7 @@ const
 after(function(done) {
 
   // Nettoyage du corpusRoot;
-  business.disconnect();
-  done();
+  business.finalJob(null,done);
 
 });
 

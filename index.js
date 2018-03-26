@@ -40,7 +40,7 @@ class CoUnique{
   }
 
   disconnect(){
-    return this.redisClient.disconnect();
+    
   }
 
 
@@ -89,6 +89,19 @@ class CoUnique{
         }
       });
     }
+  }
+
+
+  finalJob(docObject,done){
+    Promise.try(()=>{
+     return this.redisClient.disconnect();
+    })
+    .catch(err=>{
+      done(err);
+    })
+    .then(()=>{
+      done();
+    })
   }
 }
 
