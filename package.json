@@ -21,7 +21,6 @@
     "co-config": "git+https://github.com/conditor-project/co-config.git",
     "ioredis": "^3.2.2",
     "lodash": "^4.17.4",
-    "mocha": "^4.1.0",
-    "why-is-node-running": "^2.0.2"
+    "mocha": "^4.1.0"
   }
 }

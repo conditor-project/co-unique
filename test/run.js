@@ -1,7 +1,6 @@
 'use strict';
 
 const
-  log = require('why-is-node-running'),
   pkg = require('../package.json'),
   business = require('../index.js'),
   testData = require('./dataset/in/test.json'),
