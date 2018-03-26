@@ -2,6 +2,7 @@
 
 const _ = require('lodash'),
   metadataMappings = require('co-config/metadata-mappings.json'),
+  Promise = require("bluebird"),
   Redis = require('ioredis');
 
 
@@ -14,7 +15,7 @@ class CoUnique{
     this.MODULEROOT = process.env.MODULEROOT || __dirname;
     this.redisHost = process.env.REDIS_HOST || "localhost";
     this.redisPort = process.env.REDIS_PORT || 6379;
-    this.redisClient = Redis.createClient({
+    this.redisClient = new Redis({
       "host": this.redisHost,
       "port": this.redisPort
     });
@@ -23,7 +24,7 @@ class CoUnique{
   }
 
   beforeAnyJob(cbBefore){
-    this.redisClient.del("Module:"+this.redisKey+":_listId")
+    this.redisClient.del(""+this.redisKey+":_listId")
     .catch((err)=>{
       if (err){
         let error = {
@@ -36,7 +37,10 @@ class CoUnique{
         cbBefore();
 
       });
-    
+  }
+
+  disconnect(){
+    return this.redisClient.disconnect();
   }
 
 
@@ -44,27 +48,24 @@ class CoUnique{
 
     let source = jsonLine.source;
     let idSource;
-    let nameId;
+    let goodSource;
 
-    _.each(metadataMappings,(mappingSource)=>{
-      if (mappingSource.source === source) { nameId = mappingSource.nameID; }
-    });
+    goodSource=_.find(metadataMappings,(mappingSource)=>{ return mappingSource.source === source});
 
-    if ( nameId === undefined || nameId.trim() ==="") {
+    if ( goodSource === undefined || goodSource.nameID === undefined || goodSource.nameID.trim() ===""  ) {
 
       let error = {
         errCode: 1,
         errMessage: "Aucun mapping valide trouvé pour cette source."
       };
       jsonLine.error = error;
-      next(error);
-
+     next(error);
     }
     else {
-      idSource = jsonLine[nameId].value;
-      this.redisClient.sadd(["Module:"+this.redisKey+":_listId",idSource])
-      .catch(err=>{
-        if (err){
+      idSource = jsonLine[goodSource.nameID].value;
+      this.redisClient.sadd([""+this.redisKey+":_listId",idSource])
+      .catch((err)=>{
+        if (err) {
           let error = {
             errCode: 1,
             errMessage: "Erreur d'ajout d'id à la liste"
@@ -73,7 +74,7 @@ class CoUnique{
           next(error);
         }
       })
-      .then(res=>{
+      .then((res)=>{
         //console.log('res : '+res);
         if (res === 0){
           let error = {
