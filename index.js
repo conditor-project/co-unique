@@ -20,11 +20,11 @@ class CoUnique{
       "port": this.redisPort
     });
     this.redisKey = this.CONDITOR_SESSION + ":co-unique";
-    
+    this.keyName = this.redisKey+":_listId";
   }
 
   beforeAnyJob(cbBefore){
-    this.redisClient.del(""+this.redisKey+":_listId")
+    this.redisClient.del(this.keyName)
     .catch((err)=>{
       if (err){
         let error = {
@@ -37,10 +37,6 @@ class CoUnique{
         cbBefore();
 
       });
-  }
-
-  disconnect(){
-    
   }
 
 
@@ -63,7 +59,7 @@ class CoUnique{
     }
     else {
       idSource = jsonLine[goodSource.nameID].value;
-      this.redisClient.sadd([""+this.redisKey+":_listId",idSource])
+      this.redisClient.sadd([this.keyName,idSource])
       .catch((err)=>{
         if (err) {
           let error = {
@@ -102,6 +98,17 @@ class CoUnique{
     .then(()=>{
       done();
     })
+  }
+
+  afterAllTheJobs(done){
+   
+    this.redisClient.del(this.keyName) 
+    .catch(err=>{
+      done(err);
+    })
+    .then(()=>{
+      done();
+    });
   }
 }
 
