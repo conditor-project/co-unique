@@ -58,7 +58,7 @@ class CoUnique{
      next(error);
     }
     else {
-      idSource = jsonLine[goodSource.nameID].value;
+      idSource = jsonLine[goodSource.nameID];
       this.redisClient.sadd([this.keyName,idSource])
       .catch((err)=>{
         if (err) {
