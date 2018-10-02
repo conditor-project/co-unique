@@ -18,7 +18,7 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "chai": "^4.1.2",
-    "co-config": "git+https://github.com/conditor-project/co-config.git",
+    "co-config": "git+https://github.com/conditor-project/co-config.git#v1.1.0",
     "ioredis": "^3.2.2",
     "lodash": "^4.17.4",
     "mocha": "^4.1.0"
