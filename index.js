@@ -49,7 +49,6 @@ class CoUnique{
     goodSource=_.find(metadataMappings,(mappingSource)=>{ return mappingSource.source === source});
 
     if ( goodSource === undefined || goodSource.nameID === undefined || goodSource.nameID.trim() ===""  ) {
-
       let error = {
         errCode: 1,
         errMessage: "Aucun mapping valide trouvé pour cette source."
