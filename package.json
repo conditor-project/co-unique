@@ -1,6 +1,6 @@
 {
   "name": "co-unique",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Module ayant pour objet de valider l'unicité intra-base",
   "main": "index.js",
   "scripts": {
