@@ -16,7 +16,6 @@
   "author": "conditor",
   "license": "GNU",
   "dependencies": {
-    "bluebird": "^3.5.3",
     "co-config": "git+https://github.com/conditor-project/co-config.git",
     "ioredis": "^4.2.0",
     "lodash": "^4.17.11"
